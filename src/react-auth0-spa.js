@@ -53,6 +53,9 @@ export const Auth0Provider = ({
     } finally {
       setPopupOpen(false);
     }
+    const user = await auth0Client.getUser();
+    setUser(user);
+    setIsAuthenticated(true);
   };
 
   const handleRedirectCallback = async () => {
