@@ -1,19 +1,21 @@
 import React from 'react';
-import { useAuth0 } from './react-auth0-spa';
+import { Route, Router, Switch } from 'react-router-dom';
 import NavBar from './components/NavBar';
+import Profile from './components/Profile';
+import history from './utils/history';
 
 function App() {
-  const { loading } = useAuth0();
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div className='App'>
-      <header>
-        <NavBar />
-      </header>
+      <Router history={history}>
+        <header>
+          <NavBar />
+        </header>
+        <Switch>
+          <Route path='/' exact />
+          <Route path='/profile' component={Profile} />
+        </Switch>
+      </Router>
     </div>
   );
 }
