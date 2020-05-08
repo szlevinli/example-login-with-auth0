@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect, useContext } from 'react';
 import createAuth0Client from '@auth0/auth0-spa-js';
 
@@ -19,29 +20,33 @@ export const Auth0Provider = ({
 
   useEffect(() => {
     const initAuth0 = async () => {
-      const auth0FromHook = await createAuth0Client(initOptions);
-      setAuth0(auth0FromHook);
+      try {
+        const auth0FromHook = await createAuth0Client(initOptions);
+        setAuth0(auth0FromHook);
 
-      if (
-        window.location.search.includes('code=') &&
-        window.location.search.includes('state=')
-      ) {
-        const { appState } = await auth0FromHook.handleRedirectCallback();
-        onRedirectCallback(appState);
+        if (
+          window.location.search.includes('code=') &&
+          window.location.search.includes('state=')
+        ) {
+          const { appState } = await auth0FromHook.handleRedirectCallback();
+          onRedirectCallback(appState);
+        }
+
+        const isAuthenticated = await auth0FromHook.isAuthenticated();
+        setIsAuthenticated(isAuthenticated);
+
+        if (isAuthenticated) {
+          const user = await auth0FromHook.getUser();
+          setUser(user);
+        }
+
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
       }
-
-      const isAuthenticated = await auth0FromHook.isAuthenticated();
-      setIsAuthenticated(isAuthenticated);
-
-      if (isAuthenticated) {
-        const user = await auth0FromHook.getUser();
-        setUser(user);
-      }
-
-      setLoading(false);
     };
     initAuth0();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line
   }, []);
 
   const loginWithPopup = async (params = {}) => {

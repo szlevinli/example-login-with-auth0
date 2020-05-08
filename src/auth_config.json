@@ -1,4 +1,5 @@
 {
   "domain": "dev-f150b911.auth0.com",
-  "client_id": "f2StYy79NLBTu2v5Sw7lS34yRKmkzcbO"
+  "client_id": "f2StYy79NLBTu2v5Sw7lS34yRKmkzcbO",
+  "audience": "https://api.mysite.com"
 }

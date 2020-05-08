@@ -10,13 +10,20 @@ const NavBar = () => {
         <button onClick={() => loginWithRedirect({})}>Log in</button>
       )}
 
-      {isAuthenticated && <button onClick={() => logout()}>Log in</button>}
+      {isAuthenticated && <button onClick={() => logout()}>Log out</button>}
 
       {isAuthenticated && (
-        <span>
-          <Link to='/'>Home</Link>
-          <Link to='/profile'>Profile</Link>
-        </span>
+        <ul>
+          <li>
+            <Link to='/'>Home</Link>
+          </li>
+          <li>
+            <Link to='/profile'>Profile</Link>
+          </li>
+          <li>
+            <Link to='/external-api'>External API</Link>
+          </li>
+        </ul>
       )}
     </>
   );
