@@ -16,3 +16,13 @@
 - 在 [Auth0](https://auth0.com) 的 `dashboard - Application` 中创建一个应用程序，并记录下 `Domain` 和 `Client ID`
 
 ## Step 2 - 代码实现思路
+
+- **核心代码** `src/react-auth0-spa.js`
+  - 使用 `Context` 封装 [Auth0](https://auth0.com) 的 `SPA SDK`(`createAuth0Client`)
+    - `SPA` 是 Single-Page Application 的缩写
+  - 使用自定义 `Hook` 将上面封装的 `Context` 发布出来
+    - 使用自义定 `Hook` 发布 `Context` 的主要目的是使代码更易阅读。比如在代码中使用 `useAuth0` 远比 `useContext(Auth0Content)` 更加易于理解
+- **入口函数** `src/index.js`
+  - 使用 `src/react-auth0-spa.js` 返回的组件，将 `src/App.js` 返回的组件嵌入其中
+- **UI入口函数** `src/App.js`
+  - 封装其他 UI 组件
