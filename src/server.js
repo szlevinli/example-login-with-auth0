@@ -30,4 +30,6 @@ app.get('/api/external', checkJwt, (req, res) => {
   });
 });
 
-app.listen(3001, () => console.log(`API listening on 3001`));
+const PORT = 4000;
+
+app.listen(PORT, () => console.log(`API listening on ${PORT}`));
